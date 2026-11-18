@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Dashboard</title>
+
+    <link rel="stylesheet"href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="dashboard-page">
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="dashboard-header">
+
+        <div class="dashboard-title">
+            <span class="dashboard-icon">🎓</span>
+            <h1>Student Dashboard</h1>
+        </div>
+
+        <a href="{{ url_for('logout') }}"
+           class="logout-btn">
+            Logout
+        </a>
+
+    </header>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="student-container">
+
+        <!-- Welcome Card -->
+
+        <section class="welcome-card">
+
+            <div>
+                <h2>
+                    Welcome, {{ student.name }}
+                </h2>
+
+                <p>
+                    Manage your college complaints easily.
+                </p>
+            </div>
+
+            <div class="student-info">
+
+                <div>
+                    <span>Email</span>
+                    <strong>{{ student.email }}</strong>
+                </div>
+
+                <div>
+                    <span>Department</span>
+                    <strong>{{ student.department }}</strong>
+                </div>
+
+                <div>
+                    <span>Year</span>
+                    <strong>{{ student.year }}</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ACTION CARDS ================= -->
+
+        <section class="dashboard-actions">
+
+            <a href="{{ url_for('complaint_form') }}"
+               class="action-card">
+
+                <div class="action-icon">
+                    📝
+                </div>
+
+                <div>
+                    <h3>Submit Complaint</h3>
+
+                    <p>
+                        Report a new college problem.
+                    </p>
+                </div>
+
+                <span class="arrow">→</span>
+
+            </a>
+
+
+            <a href="{{ url_for('my_complaints') }}"
+               class="action-card">
+
+                <div class="action-icon">
+                    📋
+                </div>
+
+                <div>
+                    <h3>My Complaints</h3>
+
+                    <p>
+                        Track your submitted complaints.
+                    </p>
+                </div>
+
+                <span class="arrow">→</span>
+
+            </a>
+
+        </section>
+
+
+        <!-- ================= MY COMPLAINTS ================= -->
+
+        <section class="complaints-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>My Complaints</h2>
+
+                    <p>
+                        Track the status of your complaints
+                    </p>
+                </div>
+
+                <a href="{{ url_for('complaint_form') }}"
+                   class="small-btn">
+                    + New Complaint
+                </a>
+
+            </div>
+
+
+            {% if complaints %}
+
+            <div class="complaints-grid">
+
+                {% for complaint in complaints %}
+
+                <div class="complaint-card">
+
+                    <div class="complaint-top">
+
+                        <span class="category">
+                            {{ complaint.category }}
+                        </span>
+
+                        {% if complaint.status == "Resolved" %}
+
+                        <span class="status resolved">
+                            Resolved
+                        </span>
+
+                        {% elif complaint.status == "In Progress" %}
+
+                        <span class="status progress">
+                            In Progress
+                        </span>
+
+                        {% else %}
+
+                        <span class="status pending">
+                            Pending
+                        </span>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <h3>
+                        {{ complaint.title }}
+                    </h3>
+
+
+                    <p class="complaint-description">
+
+                        {{ complaint.description }}
+
+                    </p>
+
+
+                    <div class="complaint-footer">
+
+                        <span>
+                            📅
+                            {{ complaint.created_at.strftime('%d-%m-%Y') if complaint.created_at else '' }}
+                        </span>
+
+                        <a href="{{ url_for('complaint_details', complaint_id=complaint._id) }}">
+                            View Details →
+                        </a>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            {% else %}
+
+            <div class="empty-complaints">
+
+                <div class="empty-icon">
+                    📭
+                </div>
+
+                <h3>No Complaints Yet</h3>
+
+                <p>
+                    You haven't submitted any complaints.
+                </p>
+
+                <a href="{{ url_for('complaint_form') }}"
+                   class="small-btn">
+                    Submit Your First Complaint
+                </a>
+
+            </div>
+
+            {% endif %}
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

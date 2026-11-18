@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>College Complaint Management System</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #151d4f, #08101f);
+            color: white;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .glass-card {
+            width: 700px;
+            max-width: 95%;
+            padding: 70px 50px;
+            text-align: center;
+
+            background: rgba(31, 44, 65, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 28px;
+
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+        }
+
+        .logo {
+            font-size: 55px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 42px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .glass-card > p {
+            color: #9db1d0;
+            font-size: 18px;
+            margin-bottom: 35px;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+
+        .btn {
+            display: inline-block;
+            min-width: 190px;
+            padding: 15px 25px;
+
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .primary {
+            background: #5964e8;
+            color: white;
+            box-shadow: 0 8px 20px rgba(89, 100, 232, 0.35);
+        }
+
+        .secondary {
+            background: #5964e8;
+            color: white;
+            box-shadow: 0 8px 20px rgba(89, 100, 232, 0.35);
+        }
+
+        .register-link {
+            color: #9db1d0;
+            font-size: 16px;
+        }
+
+        .register-link a {
+            color: #7180ff;
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+
+            .glass-card {
+                padding: 45px 25px;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="hero">
+
+        <div class="glass-card">
+
+            <div class="logo">🎓</div>
+
+            <h1>
+                College Complaint<br>
+                Management System
+            </h1>
+
+            <p>
+                Submit, Track and Resolve College Complaints
+            </p>
+
+            <div class="button-group">
+
+                <a href="{{ url_for('student_login') }}"
+                   class="btn primary">
+                    Student Login
+                </a>
+
+                <a href="{{ url_for('admin_login') }}"
+                   class="btn secondary">
+                    Admin Login
+                </a>
+
+            </div>
+
+            <div class="register-link">
+
+                <span>New Student?</span>
+
+                <a href="{{ url_for('register') }}">
+                    Create Account
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

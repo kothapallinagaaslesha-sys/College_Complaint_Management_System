@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"content="width=device-width, initial-scale=1.0">
+
+    <title>Complaint Details</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <h1>Complaint Details</h1>
+
+    <div class="glass-card">
+
+        <h2>
+            {{ complaint.title }}
+        </h2>
+
+        <p>
+            Student:
+            {{ complaint.student_name }}
+        </p>
+
+        <p>
+            Email:
+            {{ complaint.student_email }}
+        </p>
+
+        <p>
+            Category:
+            {{ complaint.category }}
+        </p>
+
+        <p>
+            Description:
+            {{ complaint.description }}
+        </p>
+
+        <p>
+            Current Status:
+            <strong>
+                {{ complaint.status }}
+            </strong>
+        </p>
+
+        <hr>
+
+        <form method="POST"
+              action="{{ url_for(
+                  'update_status',
+                  complaint_id=complaint._id
+              ) }}">
+
+            <select name="status" required>
+
+                <option value="Pending"
+                    {% if complaint.status == "Pending" %}
+                    selected
+                    {% endif %}>
+                    Pending
+                </option>
+
+                <option value="In Progress"
+                    {% if complaint.status == "In Progress" %}
+                    selected
+                    {% endif %}>
+                    In Progress
+                </option>
+
+                <option value="Resolved"
+                    {% if complaint.status == "Resolved" %}
+                    selected
+                    {% endif %}>
+                    Resolved
+                </option>
+
+            </select>
+
+            <button type="submit">
+                Update Status
+            </button>
+
+        </form>
+
+    </div>
+
+    <br>
+
+    <a href="{{ url_for('admin_dashboard') }}">
+        ← Back to Admin Dashboard
+    </a>
+
+</div>
+
+</body>
+
+</html>

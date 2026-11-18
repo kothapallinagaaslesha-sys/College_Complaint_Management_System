@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <h1>🛡️ Admin Dashboard</h1>
+
+    <p>
+        <a href="{{ url_for('admin_logout') }}">
+            Logout
+        </a>
+    </p>
+
+    <hr>
+
+    <h2>Total: {{ total }}</h2>
+
+    <h2>Pending: {{ pending }}</h2>
+
+    <h2>In Progress: {{ in_progress }}</h2>
+
+    <h2>Resolved: {{ resolved }}</h2>
+
+    <hr>
+
+    {% if complaints %}
+
+        {% for complaint in complaints %}
+
+        <div class="glass-card">
+
+            <h2>
+                {{ complaint.title }}
+            </h2>
+
+            <p>
+                Student:
+                {{ complaint.student_name }}
+            </p>
+
+            <p>
+                Email:
+                {{ complaint.student_email }}
+            </p>
+
+            <p>
+                Category:
+                {{ complaint.category }}
+            </p>
+
+            <p>
+                Status:
+                <strong>
+                    {{ complaint.status }}
+                </strong>
+            </p>
+
+            <a href="{{ url_for(
+                'complaint_details',
+                complaint_id=complaint._id
+            ) }}">
+                View Complaint
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>
+            No complaints available.
+        </p>
+
+    {% endif %}
+
+</div>
+
+</body>
+
+</html>

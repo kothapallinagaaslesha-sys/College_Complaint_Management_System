@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Complaints</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <h1>My Complaints</h1>
+
+    <a href="{{ url_for('student_dashboard') }}">
+        ← Dashboard
+    </a>
+
+    <br><br>
+
+    <a href="{{ url_for('complaint_form') }}">
+        Submit New Complaint
+    </a>
+
+    <hr>
+
+    {% if complaints %}
+
+        {% for complaint in complaints %}
+
+        <div class="glass-card">
+
+            <h2>
+                {{ complaint.title }}
+            </h2>
+
+            <p>
+                Category: {{ complaint.category }}
+            </p>
+
+            <p>
+                {{ complaint.description }}
+            </p>
+
+            <p>
+                Status:
+                <strong>
+                    {{ complaint.status }}
+                </strong>
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>
+            No complaints available.
+        </p>
+
+    {% endif %}
+
+</div>
+
+</body>
+
+</html>
